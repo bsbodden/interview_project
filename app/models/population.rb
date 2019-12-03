@@ -1,7 +1,6 @@
 class Population < ApplicationRecord
-
   def self.min_year
-    Population.all.map(&:year).min.year
+    Population.all.map(&:year).min
   end
 
   def self.get(year)
@@ -11,7 +10,7 @@ class Population < ApplicationRecord
 
     pop = nil
     until pop
-      pop = Population.find_by_year(Date.new(year))
+      pop = Population.find_by_year(year)
       year = year - 1
     end
 
@@ -19,5 +18,4 @@ class Population < ApplicationRecord
 
     nil
   end
-
 end
