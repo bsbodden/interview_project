@@ -11,7 +11,5 @@ class Population < ApplicationRecord
     pop = Population.where("year <= ?", year).order("year DESC").limit(1).first
 
     return pop.population if pop
-
-    nil
   end
 end
