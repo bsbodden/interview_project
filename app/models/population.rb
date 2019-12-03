@@ -8,11 +8,7 @@ class Population < ApplicationRecord
 
     return 0 if year < min_year
 
-    pop = nil
-    until pop
-      pop = Population.find_by_year(year)
-      year = year - 1
-    end
+    pop = Population.where("year <= ?", year).order("year DESC").limit(1).first
 
     return pop.population if pop
 
