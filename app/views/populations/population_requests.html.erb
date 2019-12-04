@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Population Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Query</th>
+      <th>Response</th>
+      <th>When</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @population_requests.each do |population_request| %>
+      <tr>
+        <td><%= population_request.query %></td>
+        <td><%= population_request.response %></td>
+        <td><%= population_request.created_at.to_s(:db) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

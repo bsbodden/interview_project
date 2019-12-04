@@ -1,0 +1,2 @@
+class PopulationRequest < ApplicationRecord
+end
