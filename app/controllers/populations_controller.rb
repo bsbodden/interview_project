@@ -20,6 +20,6 @@ class PopulationsController < ApplicationController
   private
 
   def log_population_request
-    PopulationRequest.create(query: params[:year], response: @population) if params[:year] && @population
+    PopulationRequest.create(query: params[:year], response: @population.population, origin: @population.origin) if params[:year] && @population
   end
 end

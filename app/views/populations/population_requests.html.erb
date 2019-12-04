@@ -7,6 +7,7 @@
     <tr>
       <th>Query</th>
       <th>Response</th>
+      <th>Origin</th>
       <th>When</th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= population_request.query %></td>
         <td><%= population_request.response %></td>
+        <td><%= population_request.origin %></td>
         <td><%= population_request.created_at.to_s(:db) %></td>
       </tr>
     <% end %>
