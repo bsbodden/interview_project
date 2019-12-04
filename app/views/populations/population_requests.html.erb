@@ -2,6 +2,28 @@
 
 <h1>Population Requests</h1>
 
+<h2>Population Requests Counts for "Exact" Year</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Number of Requests</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @population_requests_summary.each do |year, count| %>
+      <tr>
+        <td><%= year %></td>
+        <td><%= count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>All Population Requests</h2>
+
 <table>
   <thead>
     <tr>

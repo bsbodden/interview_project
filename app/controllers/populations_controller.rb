@@ -14,6 +14,7 @@ class PopulationsController < ApplicationController
   end
 
   def population_requests
+    @population_requests_summary = PopulationRequest.request_counts_for_exact_years
     @population_requests = PopulationRequest.all
   end
 
