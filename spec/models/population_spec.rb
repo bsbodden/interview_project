@@ -6,20 +6,19 @@ RSpec.describe Population, type: :model do
     expect(Population.get(1990)).to eq(248709873)
   end
 
-  it "should accept a year we don't know and return the previous known population if outside the range of known years" do
-    expect(Population.get(1992)).to eq(248709873)
-    expect(Population.get(1998)).to eq(248709873)
+  it "should accept a year in the future (after 1990 and at or before 2500) and return a population prediction using an exponential growth model at 9%" do
+    expect(Population.get(1992)).to eq(544202073.1113)
+    expect(Population.get(1998)).to eq(744279874.5593126)
+  end
+
+  it "should accept a year in the future (after 2500) and return 0" do
+    expect(Population.get(2501)).to eq(0)
   end
 
   it "should accept a year that is before earliest known and return zero" do
     expect(Population.get(1800)).to eq(0)
     expect(Population.get(0)).to eq(0)
     expect(Population.get(-1000)).to eq(0)
-  end
-
-  it "should accept a year that is after latest known and return the last known population" do
-    expect(Population.get(2000)).to eq(248709873)
-    expect(Population.get(200000)).to eq(248709873)
   end
 
   it "should return a linear progression for years we don't know that are between known years" do
