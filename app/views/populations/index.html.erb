@@ -1,5 +1,5 @@
 <h1>Get your population numbers here</h1>
-<form method="get" action="populations/by_year">
-  <input name="year" />
-  <button type="submit">Submit</button>
-</form>
+<%= form_tag(populations_by_year_path, method: "get") do %>
+  <%= text_field_tag(:year) %>
+  <%= button_tag("Submit", type: 'submit', name: 'submit') %>
+<% end %>
