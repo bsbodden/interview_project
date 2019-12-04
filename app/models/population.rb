@@ -1,22 +1,12 @@
 class Population < ApplicationRecord
   def self.get(year)
     pop = Population.find_by_year(year)
-
-    if pop.nil?
-      lower_bound = year_range_lower_bound(year)
-      if lower_bound.nil?
-        0
-      else
-        upper_bound = year_range_upper_bound(year)
-        if upper_bound.nil?
-          lower_bound.population
-        else
-          linear_progression(lower_bound, upper_bound, year)
-        end
-      end
-    else
-      pop.population
-    end
+    return pop.population if pop
+    lower_bound = year_range_lower_bound(year)
+    return 0 if lower_bound.nil?
+    upper_bound = year_range_upper_bound(year)
+    return lower_bound.population if upper_bound.nil?
+    return linear_progression(lower_bound, upper_bound, year)
   end
 
   private
