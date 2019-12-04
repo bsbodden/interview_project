@@ -1,11 +1,9 @@
 module ApplicationHelper
-
   def year
-    @year.html_safe
+    @year
   end
 
   def population
     @population
   end
-
 end
