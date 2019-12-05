@@ -1,13 +1,19 @@
 class Population < ApplicationRecord
   def self.get(year, model = :logistic)
-    return PopulationResponse.new(year, 0, PopulationResponse::ORIGIN_CALCULATED) if year > 2500
     pop = Population.find_by_year(year)
-    return PopulationResponse.new(year, pop.population, PopulationResponse::ORIGIN_EXACT) if pop
     lower_bound = year_range_lower_bound(year)
-    return PopulationResponse.new(year, 0, PopulationResponse::ORIGIN_CALCULATED) if lower_bound.nil?
     upper_bound = year_range_upper_bound(year)
-    return PopulationResponse.new(year, calculate_population_for_year(year, model), PopulationResponse::ORIGIN_CALCULATED) if upper_bound.nil?
-    return PopulationResponse.new(year, linear_progression(lower_bound, upper_bound, year), PopulationResponse::ORIGIN_CALCULATED)
+
+    origin = pop ? PopulationResponse::ORIGIN_CALCULATED : PopulationResponse::ORIGIN_EXACT
+
+    population = case
+                 when year > 2500, lower_bound.nil? then 0
+                 when pop then pop.population
+                 when upper_bound.nil? then calculate_population_for_year(year, model)
+                 else linear_progression(lower_bound, upper_bound, year)
+                 end
+
+    PopulationResponse.new(year, population, origin)
   end
 
   private
