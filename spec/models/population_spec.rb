@@ -7,8 +7,13 @@ RSpec.describe Population, type: :model do
   end
 
   it "should accept a year in the future (after 1990 and at or before 2500) and return a population prediction using an exponential growth model at 9%" do
-    expect(Population.get(1992).population).to eq(544202073.1113)
-    expect(Population.get(1998).population).to eq(744279874.5593126)
+    expect(Population.get(1992, :exponential).population).to eq(544202073.1113)
+    expect(Population.get(1998, :exponential).population).to eq(744279874.5593126)
+  end
+
+  it "should accept a year in the future (after 1990 and at or before 2500) and return a population prediction using a logistic growth model" do
+    expect(Population.get(1992).population).to eq(253382544.48883402)
+    expect(Population.get(1998).population).to eq(263661803.12809205)
   end
 
   it "should accept a year in the future (after 2500) and return 0" do

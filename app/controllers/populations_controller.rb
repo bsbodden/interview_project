@@ -3,8 +3,9 @@ class PopulationsController < ApplicationController
 
   def index
     if params[:year]
+      growth_model = params[:use_exponential_model] ? :exponential : :logistic
       @year = params[:year].to_i
-      @population = Population.get(@year)
+      @population = Population.get(@year, growth_model)
     end
   end
 
